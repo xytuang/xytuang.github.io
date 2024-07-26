@@ -1,3 +1,15 @@
+.site-content {
+    max-width: 80%;
+    margin: auto;
+}
+
+.introduction-div{
+    display: grid;
+    grid-row-gap: 3rem;
+    grid-template-columns: 40% 60%;
+    margin-top: 3vw;
+}
+
 .introduction-header {
     font-family: 'Rubik', serif;
     font-size: 3vw;
