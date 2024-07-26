@@ -52,6 +52,13 @@
     margin: 0;
     color: #5c3d2e;
   }
+
+  .project-img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 1rem;
+    border: #5c3d2e solid 3px;
+  }
   
   .languages-used {
     margin: 0 auto 1.5rem 3rem;
