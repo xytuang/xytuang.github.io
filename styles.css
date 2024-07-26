@@ -1,0 +1,7 @@
+#profile-img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 1rem;
+    border: #5c3d2e solid 3px;
+    margin: 50px;
+}
