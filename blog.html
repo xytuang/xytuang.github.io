@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog - Xiang Yu Tuang">
+    <meta name="keywords" content="Databases, Systems Research, HTAP, Disaggregated Storage">
+    <meta name="author" content="Xiang Yu Tuang">
+    <meta property="og:title" content="Blog - Xiang Yu Tuang">
+    <meta property="og:description" content="Notes on database systems research.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:creator" content="@anonymous">
+    <title>Blog - Xiang Yu Tuang</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .blog-intro {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        .year-label {
+            font-size: 13px;
+            font-family: 'Merriweather', serif;
+            color: #999;
+            letter-spacing: 0.05em;
+            margin: 2rem 0 0.75rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .post-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .post-item {
+            display: grid;
+            grid-template-columns: 110px 1fr;
+            gap: 0 1.5rem;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: start;
+        }
+
+        .post-item:last-child {
+            border-bottom: none;
+        }
+
+        .post-date {
+            font-size: 13px;
+            color: #aaa;
+            padding-top: 2px;
+            white-space: nowrap;
+            font-style: italic;
+        }
+
+        .post-content {}
+
+        .post-title {
+            font-size: 15px;
+            font-weight: 400;
+            margin: 0 0 0.3rem;
+            line-height: 1.5;
+        }
+
+        .post-title a {
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s ease;
+        }
+
+        .post-title a:hover {
+            border-bottom-color: #333;
+        }
+
+        .post-desc {
+            font-size: 13px;
+            color: #777;
+            line-height: 1.6;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .post-tag {
+            display: inline-block;
+            font-size: 11px;
+            color: #999;
+            background: #f7f7f7;
+            border: 1px solid #eee;
+            padding: 1px 7px;
+            border-radius: 3px;
+            margin-left: 8px;
+            vertical-align: middle;
+            font-style: normal;
+            letter-spacing: 0.02em;
+        }
+
+        @media (max-width: 600px) {
+            .post-item {
+                grid-template-columns: 1fr;
+                gap: 0.25rem;
+            }
+        }
+    </style>
+</head>
+<body id="top">
+    <header>
+        <div class="header-content">
+            <h1>Xiang Yu Tuang</h1>
+            <p>CS Undergrad • Columbia University</p>
+            <div class="social-links-header">
+                <a href="https://scholar.google.com/citations?hl=en&user=UgK-NsoAAAAJ"><i class="fas fa-graduation-cap"></i>Google Scholar</a>
+                <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                <a href="https://github.com/xytuang"><i class="fab fa-github"></i>GitHub</a>
+                <a href="xt2280@columbia.edu"><i class="fas fa-envelope"></i>Email</a>
+            </div>
+        </div>
+        <div class="header-image">
+            <img src="images/profile.jpg" alt="Profile Photo">
+        </div>
+    </header>
+
+    <main>
+        <section id="blog">
+            <p class="blog-intro">
+                Notes on database systems research — paper readings, architecture analysis,
+                and thoughts on disaggregated and HTAP systems.
+            </p>
+
+            <div class="year-label">2026</div>
+
+            <ul class="post-list">
+                <li class="post-item">
+                    <span class="post-date">May 2026</span>
+                    <div class="post-content">
+                        <p class="post-title">
+                            <a href="posts/aurora-high-throuhgput">Aurora: Design Considerations for High Throughput Cloud Native Relational Databases (SIGMOD 2017)</a>
+                            <span class="post-tag">paper reading</span>
+                        </p>
+                        <p class="post-desc">A close reading of Amazon Aurora's SIGMOD 2017 paper — what disaggregating storage from compute actually means and why the design is more radical than it first appears.</p>
+                    </div>
+                </li>
+
+                <!-- <li class="post-item">
+                    <span class="post-date">May 2026</span>
+                    <div class="post-content">
+                        <p class="post-title">
+                            <a href="posts/extensibility-problem-htap.html">The extensibility problem in HTAP systems</a>
+                            <span class="post-tag">research</span>
+                        </p>
+                        <p class="post-desc">Every disaggregated HTAP system reimplements the same components in incompatible ways. Here's what a more modular architecture might look like.</p>
+                    </div>
+                </li> -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Last updated: May 2026. Design and source code from <a href="https://cs.stanford.edu/~yuhuiz/">Yuhui Zhang's website</a>.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

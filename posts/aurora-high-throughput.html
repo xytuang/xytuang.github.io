@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="POST DESCRIPTION HERE">
+    <meta name="author" content="Xiang Yu Tuang">
+    <meta property="og:title" content="POST TITLE HERE - Xiang Yu Tuang">
+    <meta property="og:description" content="POST DESCRIPTION HERE">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:creator" content="@anonymous">
+    <title>POST TITLE HERE - Xiang Yu Tuang</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .post-header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .post-back {
+            display: inline-block;
+            font-size: 13px;
+            color: #999;
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            transition: color 0.15s ease;
+        }
+
+        .post-back:hover {
+            color: #333;
+        }
+
+        .post-back i {
+            margin-right: 4px;
+            font-size: 11px;
+        }
+
+        .post-header h1 {
+            font-size: 22px;
+            font-weight: 400;
+            line-height: 1.4;
+            margin: 0 0 0.75rem;
+            color: #222;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            font-size: 13px;
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .post-tag {
+            display: inline-block;
+            font-size: 11px;
+            color: #999;
+            background: #f7f7f7;
+            border: 1px solid #eee;
+            padding: 1px 7px;
+            border-radius: 3px;
+            font-style: normal;
+            letter-spacing: 0.02em;
+        }
+
+        .post-body {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #333;
+            max-width: 640px;
+        }
+
+        .post-body p {
+            margin: 0 0 1.4rem;
+        }
+
+        .post-body h2 {
+            font-size: 17px;
+            font-weight: 700;
+            margin: 2.5rem 0 1rem;
+            color: #222;
+        }
+
+        .post-body h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin: 2rem 0 0.75rem;
+            color: #333;
+        }
+
+        .post-body a {
+            color: #333;
+            border-bottom: 1px solid #ccc;
+            text-decoration: none;
+            transition: border-color 0.15s ease;
+        }
+
+        .post-body a:hover {
+            border-bottom-color: #333;
+        }
+
+        .post-body blockquote {
+            margin: 1.5rem 0;
+            padding: 0 0 0 1.25rem;
+            border-left: 3px solid #ddd;
+            color: #666;
+            font-style: italic;
+        }
+
+        .post-body code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            background: #f7f7f7;
+            border: 1px solid #eee;
+            padding: 1px 5px;
+            border-radius: 3px;
+        }
+
+        .post-body pre {
+            background: #f7f7f7;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            padding: 1rem 1.25rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .post-body pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .post-body ul,
+        .post-body ol {
+            margin: 0 0 1.4rem;
+            padding-left: 1.5rem;
+        }
+
+        .post-body li {
+            margin-bottom: 0.4rem;
+        }
+
+        .post-body img {
+            max-width: 100%;
+            height: auto;
+            margin: 1.5rem 0;
+            border: 1px solid #eee;
+        }
+
+        .post-body .caption {
+            font-size: 13px;
+            color: #999;
+            font-style: italic;
+            margin-top: -1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .post-footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+            font-size: 13px;
+            color: #999;
+        }
+
+        .post-footer a {
+            color: #555;
+            text-decoration: none;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .post-footer a:hover {
+            border-bottom-color: #555;
+        }
+
+        .post-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            gap: 1rem;
+        }
+
+        .post-nav a {
+            font-size: 13px;
+            color: #777;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s ease;
+            max-width: 45%;
+        }
+
+        .post-nav a:hover {
+            border-bottom-color: #777;
+        }
+
+        .post-nav .next {
+            text-align: right;
+            margin-left: auto;
+        }
+
+        @media (max-width: 600px) {
+            .post-header h1 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body id="top">
+    <header>
+        <div class="header-content">
+            <h1>Xiang Yu Tuang</h1>
+            <p>CS Undergrad • Columbia University</p>
+            <div class="social-links-header">
+                <a href="https://scholar.google.com/citations?hl=en&user=UgK-NsoAAAAJ"><i class="fas fa-graduation-cap"></i>Google Scholar</a>
+                <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                <a href="https://github.com/xytuang"><i class="fab fa-github"></i>GitHub</a>
+                <a href="xt2280@columbia.edu"><i class="fas fa-envelope"></i>Email</a>
+            </div>
+        </div>
+        <div class="header-image">
+            <img src="../images/profile.jpg" alt="Profile Photo">
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <div class="post-header">
+                <a href="../blog.html" class="post-back"><i class="fas fa-arrow-left"></i> all posts</a>
+                <h1>Aurora: Design Considerations for High Throughput Cloud Native Relational Databases (SIGMOD 2017)</h1>
+                <div class="post-meta">
+                    <span>May 2026</span>
+                    <span class="post-tag">paper reading</span>
+                </div>
+            </div>
+
+            <div class="post-body">
+
+                <h2>Problem</h2>
+
+                <p>
+                    Opening paragraph. Set up the paper or topic — what problem does it address
+                    and why does it matter. Keep this punchy, one or two sentences.
+                </p>
+
+                <h2>Background</h2>
+
+                <p>
+                    Context the reader needs before you get into the paper itself. What was the
+                    state of the art before this work? What pain point motivated it?
+                </p>
+
+                <h2>The core idea</h2>
+
+                <p>
+                    What is the paper actually proposing? Explain it in your own words, not the
+                    abstract's words. If you can't explain it simply, you don't understand it yet.
+                </p>
+
+                <h2>What I found interesting</h2>
+
+                <p>
+                    The most valuable part of your writeup. What surprised you? What's more subtle
+                    than it first appears? What design decision is load-bearing?
+                </p>
+
+                <h2>What I found unconvincing</h2>
+
+                <p>
+                    Where does the paper's argument weaken? What does the evaluation not test?
+                    What assumptions might not hold in practice?
+                </p>
+
+                <h2>How it connects to other work</h2>
+
+                <p>
+                    How does this paper relate to others you've read? What does it respond to,
+                    build on, or contradict? This is where your longitudinal reading pays off.
+                </p>
+
+                <h2>Takeaway</h2>
+
+                <p>
+                    One or two sentences. What should the reader walk away remembering?
+                </p>
+
+            </div>
+
+            <div class="post-footer">
+                <p>
+                    If you have thoughts on this, feel free to reach out at
+                    <a href="mailto:xt2280@columbia.edu">xt2280@columbia.edu</a>.
+                </p>
+                <nav class="post-nav">
+                    <!-- Uncomment and fill in as needed -->
+                    <!-- <a href="previous-post.html" class="prev">&larr; Previous post title</a> -->
+                    <!-- <a href="next-post.html" class="next">Next post title &rarr;</a> -->
+                </nav>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>Last updated: May 2026. Design and source code from <a href="https://cs.stanford.edu/~yuhuiz/">Yuhui Zhang's website</a>.</p>
+    </footer>
+
+    <script src="../scripts.js"></script>
+</body>
+</html>
