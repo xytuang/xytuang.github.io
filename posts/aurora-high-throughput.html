@@ -280,47 +280,60 @@
                     Each redo log is replicated 6 ways across 3 Availability Zones, where each AZ has 2 replicas. A write
                     is considered durable once 4 out of the 6 replicas acknowledge it.
 
-                    Why does Aurora use this specific approach to data replication? A naive approach replicates data
-                    to 3 nodes with a 2/3 write quorum. This tolerates a single node failure but breaks under realistic
-                    conditions at scale.
+                    <h3>Fault tolerance</h3>
 
-                    In a large fleet, some nodes are always degraded. For example, disks can fail, nodes may need to reboot and
-                    network blips can happen. This background noise is constant. If an entire AZ fails (maybe due to a fire)
-                    while even one other node is degraded, 2 out of 3 replicas are simultaneously lost.
+                    <p>
+                        Why does Aurora use this specific approach to data replication? A naive approach replicates data
+                        to 3 nodes with a 2/3 write quorum. This tolerates a single node failure but breaks under realistic
+                        conditions at scale.
 
-                    Individual node failures are randoma nd independent. AZ failures are correlated wipeouts of everything
-                    in that zone at once. A quorum design must handle both simultaneously. As such, Aurora is able to
-                    tolerate a full AZ loss and one additional failure to without losing data, and tolerate a full AZ loss without
-                    losing write availability.
+                        In a large fleet, some nodes are always degraded. For example, disks can fail, nodes may need to reboot and
+                        network blips can happen. This background noise is constant. If an entire AZ fails (maybe due to a fire)
+                        while even one other node is degraded, 2 out of 3 replicas are simultaneously lost.
 
-                    After a crash, you need a safe point to truncate the log. You can't cut at an arbitrary LSN as stopping
-                    mid-transaction leaves the database inconsistent. Aurora uses three layered concepts to find the right boundary.
-                    
-                    The VCL (Volume Complete LSN) is the storage layer's answer: the highest LSN below which every log record is
-                    present with no gaps.
-                    The CPL (Consistency Point LSN) is the database's answer: specific LSNs tagged as safe transaction boundaries,
-                    marking the end of each mini-transaction (MTR).
-                    The VDL (Volume Durable LSN) combines both, and it is the highest CPL at or below the VCL.
-                    Everything above VDL is truncated on recovery.
+                        Individual node failures are random and independent. AZ failures are correlated wipeouts of everything
+                        in that zone at once. A quorum design must handle both simultaneously. As such, Aurora is able to
+                        tolerate a full AZ loss and one additional failure to without losing data, and tolerate a full AZ loss without
+                        losing write availability.
+                    </p>
 
-                    For example: if storage is complete to LSN 1007 but the only CPLs are at 900, 1000, and 1100, then VDL = 1000.
-                    Records 1001 to 1007 are discarded even though the bytes exist, because they represent an incomplete mini-transaction.
+                    <h3>Crash consistency</h3>
+                    <p>
+                        After a crash, you need a safe point to truncate the log. You can't cut at an arbitrary LSN as stopping
+                        mid-transaction leaves the database inconsistent. Aurora uses three layered concepts to find the right boundary.
+                        
+                        The VCL (Volume Complete LSN) is the storage layer's answer: the highest LSN below which every log record is
+                        present with no gaps.
+                        The CPL (Consistency Point LSN) is the database's answer: specific LSNs tagged as safe transaction boundaries,
+                        marking the end of each mini-transaction (MTR).
+                        The VDL (Volume Durable LSN) combines both, and it is the highest CPL at or below the VCL.
+                        Everything above VDL is truncated on recovery.
 
-                    Traditional distributed systems use read quorums because they don't know which node has the latest data.
-                    Aurora avoids this entirely by tracking each storage node's progress via the Segment Complete LSN (SCL).
-                    On a read, we snapshot the current VDL as a read-point, find a segment whose SCL exceeds that point, and read directly from it.
+                        For example: if storage is complete to LSN 1007 but the only CPLs are at 900, 1000, and 1100, then VDL = 1000.
+                        Records 1001 to 1007 are discarded even though the bytes exist, because they represent an incomplete mini-transaction.
+                    </p>
 
-                    Page eviction follows naturally from this. Aurora never writes dirty pages to disk on eviction.
-                    Instead, a page may only be evicted once its page LSN is covered by VDL. This condition is necessary for all changes
-                    to the page to be in the durable log. A subsequent cache miss can then ask storage for the page as of VDL
-                    and receive a fully up-to-date version.
+                    <h3>Reads without quorum</h3>
+                    <p>
+                        Traditional distributed systems use read quorums because they don't know which node has the latest data.
+                        Aurora avoids this entirely by tracking each storage node's progress via the Segment Complete LSN (SCL).
+                        On a read, we snapshot the current VDL as a read-point, find a segment whose SCL exceeds that point, and read directly from it.
 
-                    Storage nodes accumulate log records over time. To know when it's safe to discard old ones,
-                    the database tracks the oldest read-point across all active reads.
-                    This minimum is called the PGMRPL (Protection Group Minimum Read Point LSN).
+                        Page eviction follows naturally from this. Aurora never writes dirty pages to disk on eviction.
+                        Instead, a page may only be evicted once its page LSN is covered by VDL. This condition is necessary for all changes
+                        to the page to be in the durable log. A subsequent cache miss can then ask storage for the page as of VDL
+                        and receive a fully up-to-date version.
+                    </p>
 
-                    Below the PGMRPL, no read will ever be issued. Storage nodes can therefore coalesce old log records
-                    into materialized pages and garbage collect the records themselves.
+                    <h3>Log garbage collection</h3>
+                    <p>
+                        Storage nodes accumulate log records over time. To know when it's safe to discard old ones,
+                        the database tracks the oldest read-point across all active reads.
+                        This minimum is called the PGMRPL (Protection Group Minimum Read Point LSN).
+
+                        Below the PGMRPL, no read will ever be issued. Storage nodes can therefore coalesce old log records
+                        into materialized pages and garbage collect the records themselves.
+                    </p>
                 </p>
 
                 <h2>What I found interesting</h2>
